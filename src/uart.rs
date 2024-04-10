@@ -5,15 +5,15 @@ pub struct RegisterBlock {
     _reserved_1_dlh: [u8; 0x01],
     _reserved_2_fcr: [u8; 0x01],
     #[doc = "0x03 - UART Line Control Register"]
-    pub lcr: LCR,
+    lcr: LCR,
     #[doc = "0x04 - UART Modem Control Register"]
-    pub mcr: MCR,
+    mcr: MCR,
     #[doc = "0x05 - UART Line Status Register"]
-    pub lsr: LSR,
+    lsr: LSR,
     #[doc = "0x06 - UART Modem Status Register"]
-    pub msr: MSR,
+    msr: MSR,
     #[doc = "0x07 - UART Scratch Register"]
-    pub sch: SCH,
+    sch: SCH,
 }
 impl RegisterBlock {
     #[doc = "0x00 - UART Divisor Latch Low Register"]
@@ -50,6 +50,26 @@ impl RegisterBlock {
     #[inline(always)]
     pub const fn iir(&self) -> &IIR {
         unsafe { &*(self as *const Self).cast::<u8>().add(2usize).cast() }
+    }
+    #[doc = "0x03 - UART Line Control Register"]
+    pub fn lcr(&self) -> &LCR {
+        &self.lcr
+    }
+    #[doc = "0x04 - UART Modem Control Register"]
+    pub fn mcr(&self) -> &MCR {
+        &self.mcr
+    }
+    #[doc = "0x05 - UART Line Status Register"]
+    pub fn lsr(&self) -> &LSR {
+        &self.lsr
+    }
+    #[doc = "0x06 - UART Modem Status Register"]
+    pub fn msr(&self) -> &MSR {
+        &self.msr
+    }
+    #[doc = "0x07 - UART Scratch Register"]
+    pub fn sch(&self) -> &SCH {
+        &self.sch
     }
 }
 #[doc = "rbr (r) register accessor: an alias for `Reg<RBR_SPEC>`"]
